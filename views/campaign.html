@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We Care</title>
+    <link rel="icon" type="image/x-icon" href="/img/icon.ico" />
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/waterfall.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<body>
+<div id="header">
+    <h1>
+        <a href="/">We Care</a>
+        <div class="fright menu-links">
+            <a href="/">Campaigns</a>
+            <span>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="/ngos">NGOs</a>
+        </div>
+        
+    </h1>
+    <div class="fclear"></div>
+</div>
+<div class="container">
+    <h1 class="tbpadding10 tcenter header">
+        <%= campaign.name %> - <%= campaign.subTitle %>
+    </h1>
+    <div class="tcenter subheader">
+        <span class="created_at"><%= formatDate(campaign.metadata.startsOn) %>&nbsp;-&nbsp;<%= formatDate(campaign.metadata.endsOn) %></span>
+    </div>
+    <div class="tcenter subheader">
+        <span>by <a class="campaign-link" href="/ngo/<%= campaign.ngo._id %>"><%= campaign.ngo.name %></a></span>
+    </div>
+    <div class="tbpadding10">
+        <%= campaign.about %>
+    </div>
+    <div>
+        <div>Mission &nbsp; : <span><%= campaign.mission %></span></div>
+        <%if (campaign.contact) { %>
+            <div class="tbpadding10">
+                <%if (campaign.contact.website) { %>
+                    <span>
+                        <a href="<%= campaign.contact.website %>">
+                            <i class="social-icons fa fa-globe"></i>
+                        </a>
+                    </span>
+                <% } %>
+                <%if (campaign.contact.email) { %>
+                    <span>
+                        <a href="mailto:<%= campaign.contact.email %>">
+                            <i class="social-icons fa fa-envelope"></i>
+                        </a>
+                    </span>
+                <% } %>
+                <%if (campaign.contact.tw_link) { %>
+                    <span>
+                        <a href="<%= campaign.contact.tw_link %>">
+                            <i class="social-icons fa fa-twitter"></i>
+                        </a>
+                    </span>
+                <% } %>
+                <%if (campaign.contact.fb_link) { %>
+                    <span>
+                        <a href="<%= campaign.contact.fb_link %>">
+                            <i class="social-icons fa fa-facebook-official"></i>
+                        </a>
+                    </span>
+                <% } %>
+            </div>
+        <% } %>
+        <div> 
+        <div class="campaign-card-container">
+        <% for(var i=0; i<campaign.activities.length; i++) { %>
+            <div class="campaign-card">
+                <img src='<%= campaign.activities[i].img %>' width="192"/>
+                <div class="campaign-meta">
+                    <div class="campaign-name"><%= campaign.activities[i].title %></div>
+                    <div class="shortDesc"><%= campaign.activities[i].desc %></div>
+                </div>
+            
+            </div>
+        <% } %>
+        </div>
+    </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="padding10">
+        &copy;2015 We Care.
+    </div>
+</div>
+
+</body>
+</html>
